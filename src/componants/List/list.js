@@ -6,7 +6,7 @@ function List() {
     const [items, setItems] = useState([]);
 
     const addlistItem = (listItem) => {
-        if (!listItem.text || /^\s*$/.test(listItem.text)) {
+        if (!listItem.title || /^\s*$/.test(listItem.title)) {
             return;
         }
         const newItems = [listItem, ...items];
@@ -14,14 +14,23 @@ function List() {
         setItems(newItems);
     };
 
-    // const removeTodo = (id) => {
-    //     const removeArr = [...items].filter((listItem) => listItem.id !== id);
+    // const updateItem = (itemId, newValue) => {
+    //     if (!newValue.title || /^\s*$/.test(newValue.title)) {
+    //         return;
+    //     }
 
-    //     setItems(removeArr);
+    //     setItems((prev) =>
+    //         prev.map((item) => (item.id === itemId ? newValue : item)),
+    //     );
     // };
+    const onDelete = (id) => {
+        const removeArr = [...items].filter((listItem) => listItem.id !== id);
+
+        setItems(removeArr);
+    };
 
     const completelistItem = (id) => {
-        let updatedlistItem = items.map((listItem) => {
+        let updatedItems = items.map((listItem) => {
             if (listItem.id === id) {
                 listItem.isComplete = !listItem.isComplete;
             }
@@ -29,9 +38,8 @@ function List() {
             return listItem;
         });
 
-        setItems(updatedlistItem);
+        setItems(updatedItems);
     };
-
     return (
         <div>
             <div>
@@ -40,7 +48,8 @@ function List() {
                 <ListItems
                     items={items}
                     completelistItem={completelistItem}
-                    // removeTodo={removeTodo}
+                    onDelete={onDelete}
+                    // updateItem={updateItem}
                 />
             </div>
         </div>

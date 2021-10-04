@@ -7,6 +7,7 @@ function GetUser(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         props.onSubmit({
             id: uuidv4(),
             title: title,
@@ -28,6 +29,7 @@ function GetUser(props) {
                 <label>Title :</label>
                 <input
                     type="text"
+                    name="text"
                     placeholder="title"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
@@ -43,7 +45,7 @@ function GetUser(props) {
                 />
             </div>
             <div>
-                <button>Submit</button>
+                <button onClick={handleSubmit}>Submit</button>
                 <button onClick={onClear}>clear</button>
             </div>
         </form>

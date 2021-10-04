@@ -1,36 +1,52 @@
 import React, { useState } from 'react';
+import GetUser from '../GetUser/GetUser';
 
-function ListItems({ items, completelistItem }) {
+function ListItems({ items, completelistItem, onDelete }) {
     // const [openModal, setOpenModal] = useState(false);
-    // const [selectedId, setSelectedId] = useState();
+    const [selectedId, setSelectedId] = useState();
 
-    // const onDelete = (id) => {
-    //     setOpenModal(true);
-    //     setSelectedId(id);
+    // const [edit, setEdit] = useState({
+    //     id: null,
+    //     value: '',
+    // });
+    // const SubmitUpdate = (value) => {
+    //     updateItem(edit.id, value);
+    //     setEdit({
+    //         id: null,
+    //         value: '',
+    //     });
     // };
-
+    // if (edit.id) {
+    //     return <GetUser edit={edit} onSubmit={SubmitUpdate} />;
+    // }
     return items.map((listItem, index) => (
         <div
             className={
-                listItem.isComplete ? 'listItem-rpw complete' : 'listItem-row'
+                listItem.isComplete ? 'listItem-row complete' : 'listItem-row'
             }
-            key={listItem.id}
-            onClick={() => completelistItem(listItem.id)}
+            key={index}
         >
-            <div>
+            <div
+                key={listItem.id}
+                onClick={() => completelistItem(listItem.id)}
+            >
                 <div>
-                    <h3> {listItem.title}</h3>
-                    <p> {listItem.body}</p>
+                    {listItem.title}
+                    {listItem.body}
                 </div>
 
                 <div>
                     <div
-
-                    // onClick={() => onDelete(listItem.id)}
+                        className="delete--icon"
+                        onClick={() => onDelete(listItem.id)}
                     >
                         <i className="material-icons">delete</i>
                     </div>
-                    <div>
+                    <div
+                    // onClick={() =>
+                    //     setEdit({ id: listItem.id, value: listItem.title })
+                    // }
+                    >
                         <i className="material-icons">edit</i>
                     </div>
                 </div>
